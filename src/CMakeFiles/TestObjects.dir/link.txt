@@ -1,0 +1,2 @@
+/opt/rh/devtoolset-3/root/usr/bin/ar qc libTestObjects.a  CMakeFiles/TestObjects.dir/test_libcurl.cpp.o
+/opt/rh/devtoolset-3/root/usr/bin/ranlib libTestObjects.a

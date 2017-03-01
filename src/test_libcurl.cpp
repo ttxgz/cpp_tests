@@ -29,19 +29,19 @@ LibcurlTester::LibcurlTester()
 	err = curl_easy_setopt(curl_handler, CURLOPT_FRESH_CONNECT, 1L);	
 
 	// set debug
-	curl_easy_setopt(curl, CURLOPT_VERBOSE, 1L);
-	curl_easy_setopt(curl, CURLOPT_DEBUGFUNCTION, Trace);
-	curl_easy_setopt(curl, CURLOPT_DEBUGDATA, this);
+	curl_easy_setopt(curl_handler, CURLOPT_VERBOSE, 1L);
+	curl_easy_setopt(curl_handler, CURLOPT_DEBUGFUNCTION, Trace);
+	curl_easy_setopt(curl_handler, CURLOPT_DEBUGDATA, this);
 
 	// set method
 	err = curl_easy_setopt(curl_handler, CURLOPT_POST, 1L);	
 
 	// set read callback
-	curl_easy_setopt(curl, CURLOPT_READFUNCTION, read_callback);
-	curl_easy_setopt(curl, CURLOPT_READDATA, this);
+	curl_easy_setopt(curl_handler, CURLOPT_READFUNCTION, ReadCallback);
+	curl_easy_setopt(curl_handler, CURLOPT_READDATA, this);
 
 	// set timerout
-	curl_easy_setopt(curl, CURLOPT_TIMEOUT, 30L);
+	curl_easy_setopt(curl_handler, CURLOPT_TIMEOUT, 30L);
 }
 
 LibcurlTester::~LibcurlTester()
@@ -95,7 +95,7 @@ void LibcurlTester::run()
 		err = curl_easy_perform(curl_handler);
 		if(err != CURLE_OK)
 		{
-			std::cerr << "curl_easy_perform() failed: " << curl_easy_sterror(err) << std::endl;
+			std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(err) << std::endl;
 		}
 	}
 }
@@ -111,8 +111,8 @@ size_t LibcurlTester::ReadCallback(void *ptr, size_t size, size_t nmemb, void *u
 	if (read_bytes > 0)
 	{
 		std::cout << "begin to copy " << read_bytes << " data:" << std::endl;
-		std::cout << curl->data << std::endl;
-		memcpy(ptr, data.c_str(), read_bytes);
+		//std::cout << curl->data << std::endl;
+		memcpy(ptr, curl->data.c_str(), read_bytes);
 		std::cout << "end to copy data" << std::endl;
 		curl->data.erase(0, read_bytes);
 	}
@@ -123,10 +123,14 @@ size_t LibcurlTester::ReadCallback(void *ptr, size_t size, size_t nmemb, void *u
 	return read_bytes;                        /* no more data left to deliver */ 
 }
 
-static int LibcurlTester::Trace(CURL* handle, curl_infotype type, char* data, size_t size, void* userptr)
+int LibcurlTester::Trace(CURL* handle, curl_infotype type, char* data, size_t size, void* userptr)
 {
 
-    const char *text;
+	(void)(handle);
+	(void)(userptr);
+
+#if 0
+    std::string text;
     switch (type) {
     case CURLINFO_TEXT:
         text = "=> Info";
@@ -160,6 +164,11 @@ static int LibcurlTester::Trace(CURL* handle, curl_infotype type, char* data, si
         std::cout << text << size << "bytes" << std::endl;
         std::cout << data_dump << std::endl;
     }
+#else
+	(void)(type);
+	(void)(data);
+	(void)(size);
+#endif
     return 0;
 }
 

@@ -1,4 +1,6 @@
 #include "test_libcurl.h"
+#include <iostream>
+#include <string.h>
 
 
 bool LibcurlTester::global_inited = false;

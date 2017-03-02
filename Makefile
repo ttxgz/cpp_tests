@@ -4,6 +4,7 @@ SRCDIR= src
 CXX= g++
 RM= rm
 
+ARCH= 64
 DEFINES= -std=gnu++14
 DEBUG=-g -pg -O0
 RELEASE=-O3
@@ -11,12 +12,12 @@ RELEASE=-O3
 WARNINGS=-Wall -Wextra -pedantic
 INCLUDES= -I./include
 
-EXEC= $(BINDIR)/cpp_test_64.exe
+EXEC= $(BINDIR)/cpp_test_$(ARCH)bit.exe
 OBJS= $(BINDIR)/main.o $(BINDIR)/test_libcurl.o
 
 
-CXXFLAGS+= $(ARCH) ${DEBUG} ${WARNINGS} ${DEFINES} ${INCLUDES}
-LDFLAGS+= $(ARCH) ${DEBUG} ${WARNINGS} ${DEFINES}
+CXXFLAGS+= -m$(ARCH) ${DEBUG} ${WARNINGS} ${DEFINES} ${INCLUDES}
+LDFLAGS+= -m$(ARCH) ${DEBUG} ${WARNINGS} ${DEFINES}
 
 LIBDIR=
 #LIBDIR=-L/usr/local/lib

@@ -11,12 +11,12 @@ RELEASE=-O3
 WARNINGS=-Wall -Wextra -pedantic
 INCLUDES= -I./include
 
-EXEC= $(BINDIR)/cpp_test.exe
+EXEC= $(BINDIR)/cpp_test_64.exe
 OBJS= $(BINDIR)/main.o $(BINDIR)/test_libcurl.o
 
 
-CXXFLAGS+= ${DEBUG} ${WARNINGS} ${DEFINES} ${INCLUDES}
-LDFLAGS+= ${DEBUG} ${WARNINGS} ${DEFINES}
+CXXFLAGS+= $(ARCH) ${DEBUG} ${WARNINGS} ${DEFINES} ${INCLUDES}
+LDFLAGS+= $(ARCH) ${DEBUG} ${WARNINGS} ${DEFINES}
 
 LIBDIR=
 #LIBDIR=-L/usr/local/lib

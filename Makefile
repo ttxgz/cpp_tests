@@ -13,7 +13,7 @@ WARNINGS=-Wall -Wextra -pedantic
 INCLUDES= -I./include
 
 EXEC= $(BINDIR)/cpp_test_$(ARCH)bit.exe
-OBJS= $(BINDIR)/main.o $(BINDIR)/test_libcurl.o
+OBJS= $(BINDIR)/main.o $(BINDIR)/test_libcurl.o $(BINDIR)/test_uniqueptr.o
 
 
 CXXFLAGS+= -m$(ARCH) ${DEBUG} ${WARNINGS} ${DEFINES} ${INCLUDES}
@@ -38,6 +38,9 @@ bin/main.o: src/main.cpp
 
 bin/test_libcurl.o: src/test_libcurl.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@  src/test_libcurl.cpp
+
+bin/test_uniqueptr.o: src/test_uniqueptr.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@  src/test_uniqueptr.cpp
 
 .PHONY: clean
 clean:

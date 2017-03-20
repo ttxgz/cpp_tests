@@ -16,12 +16,12 @@ EXEC= $(BINDIR)/cpp_test_$(ARCH)bit.exe
 OBJS= $(BINDIR)/main.o $(BINDIR)/test_libcurl.o $(BINDIR)/test_uniqueptr.o
 
 
-CXXFLAGS+= -m$(ARCH) ${DEBUG} ${WARNINGS} ${DEFINES} ${INCLUDES}
-LDFLAGS+= -m$(ARCH) ${DEBUG} ${WARNINGS} ${DEFINES}
+CXXFLAGS+= -fpermissive -m$(ARCH) ${DEBUG} ${WARNINGS} ${DEFINES} ${INCLUDES}
+LDFLAGS+= -fpermissive -m$(ARCH) ${DEBUG} ${WARNINGS} ${DEFINES}
 
 LIBDIR=
 #LIBDIR=-L/usr/local/lib
-LDLIBS=-lcurl
+LDLIBS=-lcurl -lev
 
 #LIBCURL = /usr/local/lib/libcurl.so.4
 

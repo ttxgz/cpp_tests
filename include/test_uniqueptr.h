@@ -1,3 +1,6 @@
+#ifndef LIB_UNIQUEPTR
+#define LIB_UNIQUEPTR
+
 #include <string>
 #include <functional>
 #include <list>
@@ -17,4 +20,6 @@ private:
 	bool CustomDeletor();
 	bool DoubleDelByPtrValueAssign();
 };
+
+#endif
 

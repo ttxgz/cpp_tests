@@ -1,3 +1,6 @@
+#ifndef LIB_CURL
+#define LIB_CURL
+
 #include <string>
 #include <curl/curl.h>
 
@@ -21,4 +24,6 @@ private:
 	CURL* curl_handler;
 	std::string data;
 };
+
+#endif
 

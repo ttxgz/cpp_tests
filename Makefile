@@ -13,7 +13,7 @@ WARNINGS=-Wall -Wextra -pedantic
 INCLUDES= -I./include
 
 EXEC= $(BINDIR)/cpp_test_$(ARCH)bit.exe
-OBJS= $(BINDIR)/main.o $(BINDIR)/test_libcurl.o $(BINDIR)/test_uniqueptr.o $(BINDIR)/libcurl_mult_socket_libev.o
+OBJS= $(BINDIR)/main.o $(BINDIR)/test_libcurl.o $(BINDIR)/test_uniqueptr.o $(BINDIR)/libcurl_mult_socket_libev.o $(BINDIR)/test_promise_future.o
 
 
 CXXFLAGS+= -fpermissive -m$(ARCH) ${DEBUG} ${WARNINGS} ${DEFINES} ${INCLUDES}
@@ -21,7 +21,7 @@ LDFLAGS+= -fpermissive -m$(ARCH) ${DEBUG} ${WARNINGS} ${DEFINES}
 
 LIBDIR=
 #LIBDIR=-L/usr/local/lib
-LDLIBS=-lcurl -lev
+LDLIBS=-lcurl -lev -lgtest
 
 #LIBCURL = /usr/local/lib/libcurl.so.4
 
@@ -44,6 +44,9 @@ bin/test_uniqueptr.o: src/test_uniqueptr.cpp
 
 bin/libcurl_mult_socket_libev.o: src/libcurl_mult_socket_libev.cpp
 	$(CXX) $(CXXFLAGS) -c -o $@  src/libcurl_mult_socket_libev.cpp
+
+bin/test_promise_future.o: src/test_promise_future.cpp
+	$(CXX) $(CXXFLAGS) -c -o $@  src/test_promise_future.cpp
 
 .PHONY: clean
 clean:

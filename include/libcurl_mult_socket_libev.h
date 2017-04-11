@@ -1,0 +1,6 @@
+#ifndef LIBCURL_MULT_SOCKET_LIBEV
+#define LIBCURL_MULT_SOCKET_LIBEV
+
+
+#endif
+

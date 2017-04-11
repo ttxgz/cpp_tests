@@ -26,11 +26,14 @@
 class PromiseFutureTest : public testing::Test
 {
 public:
-	std::string test_name;
 	PromiseFutureTest();
 	virtual ~PromiseFutureTest();
 
+	void PrintTestInfo(const std::string& info);
+
+
 	static bool IsPrime(int x);
+	
 };
 #endif
 
